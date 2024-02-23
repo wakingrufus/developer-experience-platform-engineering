@@ -1,0 +1,341 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+    <style>
+        .grid-area {
+            display: grid;
+            grid-auto-flow: column;
+        }
+
+        .reveal pre code {
+            max-height: none;
+        }
+
+        .reveal pre {
+            width: 100%;
+        }
+
+        .inline-image img {
+            margin: 0;
+        }
+
+        .inline-image {
+            display: inline-flex;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-timing="60">
+            <h1>Platform Engineering</h1>
+            <p>
+                <img style="vertical-align: middle" alt="donkey kong" src="kong.png" height="400" width="500">
+            </p>
+            <aside class="notes">
+                tag yourself: your devs are mario, donkey kong... product,
+                and princess is of course where you are always trying to get to: production
+            </aside>
+        </section>
+        <section data-timing="30s">
+            <h1>About Me</h1>
+            <aside class="notes">
+                You can also find me on the Chicago Tech and Kotlin slacks and the CJUG discord
+            </aside>
+            <h3>John Burns</h3>
+            <div class="grid-area">
+                <div style="text-align: left">
+                    <p>Staff Platform Engineer @ GrubHub</p>
+                    <p>CKUG Co-Organizer</p>
+                    <p>ktlint-gradle Maintainer</p>
+                    <p class="inline-image">
+                        <img alt="github logo" src="github-logo.png" height="48" width="48"/>
+                        <span style="padding-left: .5em; padding-right: 2em;">wakingrufus</span></p>
+                    <p class="inline-image"><img alt="fediverse logo" src="fediverse.png" height="48" width="48"/>
+                        <span style="padding-left: .5em">@wakingrufus@bigshoulders.city</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section data-timing="30">
+            <img alt="GrubHub logo" src="gh-logo.png" height="194" width="688">
+            <aside class="notes">
+                HQ is chicago
+                What I do: Service Platform Engineering: JVM Stewardship
+            </aside>
+            <ul>
+                <li>Unlimited PTO</li>
+                <li>8-16 weeks of parental leave</li>
+                <li>4.5 day work week</li>
+                <li>Based in Chicago</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="120">
+            <h2>Problems with DevOps</h2>
+            <aside class="notes">
+                DevOps solves a lot of problems, but presents some new ones
+                variety: 20 teams means 20 different ci pipes, cd pipes, build systems, etc
+                duplication: 1 or 2 ppl on every team solving the same problems
+                commodities: 90% of the time product delivery devs just want to write code and have it run
+            </aside>
+            <ul>
+                <li class="fragment">Too much variety</li>
+                <li class="fragment">Duplication of effort</li>
+                <li class="fragment">Lack of commodities</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="120">
+            <h2>Platform Engineering</h2>
+            <aside class="notes">
+                There is no single definition.
+                It commonly is used to refer to an IaaS platform, such as an integrated CI/CD/k8s platform.
+                At Grubhub, we have taken a more holistic approach (similar to Netflix)
+                We encompass language-specific tooling to improve the end-to-end developer experience,
+                while still supporting a language-agnostic infrastructure.
+                build tooling: eg bazel, gradle plugins
+                platform services: kafka or other message buses. API gateway, discovery, cloud config server
+                Runtime libraries: Spring boot extensions
+            </aside>
+            <ul>
+                <li class="fragment">Ecosystem-specific build tooling (bazel, Gradle, Maven, etc)</li>
+                <li class="fragment">Platform Services (Message brokers, API gateways, config servers, discovery)</li>
+                <li class="fragment">Observability (logging, metrics, tracing)</li>
+                <li class="fragment">Service Runtime libraries (spring boot extensions)</li>
+                <li class="fragment">Frontend libraries</li>
+                <li class="fragment">Data Platform (Data lake, ML models)</li>
+                <li class="fragment">Security (DevSecOps)</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="120">
+            <h3 data-id="section">Guiding Principles</h3>
+            <h2>Developer Experience</h2>
+            <aside class="notes">
+                this talk is unopinionated, but we will use examples of our implementation.
+                But we have developed some opinions that guide our overall approach.
+                The single theme they all draw back to is Developer Experience.
+                DX's scope is bigger than Platform, but Platform provides the tech solution part of DX
+                For the non-technical aspect, refer to Cat Hicks
+            </aside>
+            <div class="grid-area">
+                <div class="fragment">
+                    <h4>If We...</h4>
+                    <ul>
+                        <li class="fragment">Build for team autonomy</li>
+                        <li class="fragment">Clear potential blockers</li>
+                        <li class="fragment">Reduce learning curve</li>
+                    </ul>
+                </div>
+                <div class="fragment">
+                    <h4>Then we will see...</h4>
+                    <ul>
+                        <li class="fragment">Better Retention</li>
+                        <li class="fragment">Higher Productivity</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section data-auto-animate data-timing="120">
+            <h3 data-id="section">Guiding Principles</h3>
+            <h2>Golden path</h2>
+            <ul>
+                <li class="fragment">Not "golden cage" or "walled garden"</li>
+                <li class="fragment">When should team "off-road"?</li>
+                <li class="fragment">When should path be "widened"?</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="120">
+            <h3 data-id="section">Guiding Principles</h3>
+            <h2>Carrot vs Stick</h2>
+            <aside class="notes">
+                using the stick will create a bad experience
+                creates friction and distrust between platform and delivery teams
+                will decrease moral and burnout
+            </aside>
+            <ul>
+                <li class="fragment">Build a great product</li>
+                <li class="fragment">Teams will adopt it voluntarily</li>
+                <li class="fragment">Force adoption only as a last resort</li>
+            </ul>
+        </section>
+
+        <section data-auto-animate data-timing="120">
+            <h3 data-id="section">Guiding Principles</h3>
+            <h2>Communication / Feedback Loops</h2>
+            <aside class="notes">
+                As we go through some of our specific impl,
+                you might notice they all are about communication
+                either from dev to platform or from platform to dev
+            </aside>
+            <ul>
+                <li class="fragment"></li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="120">
+            <h3 data-id="section">Technical Philosophy</h3>
+            <aside class="notes">
+                These are technical decisions we made based that help us stick to these principles
+            </aside>
+        </section>
+        <section data-auto-animate data-timing="120">
+            <h3 data-id="section">Technical Philosophy</h3>
+            <h2>Don't break the build</h2>
+            <aside class="notes">
+                don't break downstream team's builds or other processes
+            </aside>
+            <ul>
+                <li class="fragment">Can't stagnate</li>
+                <li class="fragment">Anticipate breaking changes</li>
+                <li class="fragment">Help teams migrate</li>
+                <li class="fragment">Track and report progress</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="120">
+            <h3 data-id="section">Technical Philosophy</h3>
+            <h2>Monorepo vs polyrepo</h2>
+            <aside class="notes">
+                The concept of the monorepo solves a specific problem: dealing with changes which effect multiple parts of the system. But it asks a lot of you. It often requires a whole build engineering team to maintain the highly customized build. It results in large repositories.
+                {Insert anecdote about exceeding maximum number of PR reviewers on github due to codeowners}
+                We believe that we can solve the problem of managing changes and upgrades across our software components without taking on the downsides of a monorepo. It requires a little more work, but once it is in place, it gives us the best of both worlds, without introducing tight coupling at the repo layer or sacrificing autonomy.
+            </aside>
+            <ul>
+                <li class="fragment">Keep related work together (iaas definitions, docs, etc)</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="120">
+            <h3 data-id="section">Technical Philosophy</h3>
+            <h2>Docker</h2>
+            <aside class="notes">
+
+            </aside>
+            <ul>
+                <li class="fragment">Docker is the standard deployable unit</li>
+                <li class="fragment">Platform Agnostic</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="240">
+            <h3 data-id="section">Platform Elements of DX</h3>
+            <aside class="notes">
+                This is the Hub of the DX and communication
+            </aside>
+        </section>
+        <section data-auto-animate data-timing="240">
+            <h3 data-id="section">Platform Elements of DX</h3>
+            <h2>IDP</h2>
+            <aside class="notes">
+                This is the Hub of the DX and communication
+            </aside>
+            <ul>
+                <li class="fragment">IDP: "Platform" vs "Portal"</li>
+                <li class="fragment">Deployment state</li>
+                <li class="fragment">Adoption</li>
+                <li class="fragment">Security</li>
+                <li class="fragment">Service Scorecard</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="240">
+            <h3 data-id="section">Platform Elements of DX</h3>
+            <h2>Service Scorecard</h2>
+            <ul>
+                <li class="fragment">Adoption</li>
+                <li class="fragment">Security</li>
+                <li class="fragment">Modernization</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="240">
+            <h3 data-id="section">Platform Elements of DX</h3>
+            <h2>Documentation Platform</h2>
+            <ul>
+                <li class="fragment">Onboarding</li>
+                <li class="fragment">Discovery</li>
+                <li class="fragment">Reference</li>
+                <li class="fragment">Javadocs</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="240">
+            <h3 data-id="section">Platform Elements of DX</h3>
+            <h2>New Project Wizard</h2>
+            <ul>
+                <li class="fragment">Streamline scratch-to-deploy process</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="240">
+            <h3 data-id="section">Platform Elements of DX</h3>
+            <h2>CI/CD</h2>
+            <ul>
+                <li class="fragment">View deployment state</li>
+                <li class="fragment">Trigger pipelines</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="240">
+            <h3 data-id="section">Platform Elements of DX</h3>
+            <h2>Local Development Environment</h2>
+            <ul>
+                <li class="fragment">Tilt</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="240">
+            <h3 data-id="section">Platform Elements of DX</h3>
+            <h2>Build Tooling</h2>
+            <ul>
+                <li class="fragment">Gradle Plugins</li>
+                <li class="fragment">Generating deployable unit is table stakes</li>
+                <li class="fragment">Most direct line of communication to the developer</li>
+                <li class="fragment">Collect information for reporting back to the IDP</li>
+            </ul>
+        </section>
+        <section>
+            <h2>References</h2>
+            <aside class="notes">
+            </aside>
+            <p class="fragment">
+                <a href="https://dev.to/jreock/developer-experience-is-dead-long-live-developer-experience-1col">Developer Experience is Dead: Long Live Developer Experience!</a> - Justin Reock
+            </p>
+            <p class="fragment">
+                <a href="https://osf.io/preprints/psyarxiv/qz43x">Psychological Affordances Can Provide a Missing Explanatory Layer for Why Interventions to Improve Developer Experience Take Hold or Fail</a> - <a href="https://www.drcathicks.com/">Cat Hicks</a>
+            </p>
+        </section>
+        <section data-timing="10">
+            <div class="grid-area">
+                <div style="text-align: left">
+                    <div><a href="https://wakingrufus.github.io/developer-experiance-platform-engineering/">https://wakingrufus.github.io/developer-experiance-platform-engineering/</a></div>
+                    <p class="inline-image">
+                        <img alt="github logo" src="github-logo.png" height="48" width="48"/>
+                        <span style="padding-left: .5em">wakingrufus</span>
+                    </p>
+                    <p class="inline-image"><img alt="fediverse logo" src="fediverse.png" height="48" width="48"/>
+                        <span style="padding-left: .5em">@wakingrufus@bigshoulders.city</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+        defaultTiming: 60,
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+</script>
+</body>
+</html>
