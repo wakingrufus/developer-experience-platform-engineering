@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="dist/reset.css">
     <link rel="stylesheet" href="dist/reveal.css">
-    <link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/theme/league.css">
 
     <!-- Theme used for syntax highlighted code -->
     <link rel="stylesheet" href="plugin/highlight/monokai.css">
@@ -39,29 +39,24 @@
 <div class="reveal">
     <div class="slides">
         <section data-timing="60">
-            <h1>Platform Engineering</h1>
-            <p>
-                <img style="vertical-align: middle" alt="donkey kong" src="kong.png" height="400" width="500">
-            </p>
-            <aside class="notes">
-                tag yourself: your devs are mario, donkey kong... product,
-                and princess is of course where you are always trying to get to: production
-            </aside>
+            <h2>Delivering a Great Developer Experience</h2>
+            <h3>with Platform Engineering</h3>
         </section>
-        <section data-timing="30s">
-            <h1>About Me</h1>
+        <section data-timing="30">
+            <h1>About Us</h1>
             <aside class="notes">
                 You can also find me on the Chicago Tech and Kotlin slacks and the CJUG discord
             </aside>
             <h3>John Burns</h3>
             <div class="grid-area">
                 <div style="text-align: left">
-                    <p>Staff Platform Engineer @ GrubHub</p>
+                    <p>Sr. Staff Platform Engineer @ GrubHub</p>
                     <p>CKUG Co-Organizer</p>
                     <p>ktlint-gradle Maintainer</p>
                     <p class="inline-image">
                         <img alt="github logo" src="github-logo.png" height="48" width="48"/>
-                        <span style="padding-left: .5em; padding-right: 2em;">wakingrufus</span></p>
+                        <span style="padding-left: .5em; padding-right: 2em;">wakingrufus</span>
+                    </p>
                     <p class="inline-image"><img alt="fediverse logo" src="fediverse.png" height="48" width="48"/>
                         <span style="padding-left: .5em">@wakingrufus@bigshoulders.city</span>
                     </p>
@@ -69,16 +64,27 @@
             </div>
         </section>
         <section data-timing="30">
+            <h1>About Us</h1>
+            <h3>Sam Raghunath</h3>
+            <div class="grid-area">
+                <div style="text-align: left">
+                    <p>Ex-Sr. Principal Platform Engineer @ GrubHub</p>
+                    <p class="inline-image">
+                        <img alt="github logo" src="github-logo.png" height="48" width="48"/>
+                        <span style="padding-left: .5em; padding-right: 2em;">onewaysidewalks</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section data-timing="30">
             <img alt="GrubHub logo" src="gh-logo.png" height="194" width="688">
             <aside class="notes">
-                HQ is chicago
-                What I do: Service Platform Engineering: JVM Stewardship
             </aside>
             <ul>
                 <li>Unlimited PTO</li>
                 <li>8-16 weeks of parental leave</li>
                 <li>4.5 day work week</li>
-                <li>Based in Chicago</li>
+                <li>Practice Platform Engineering</li>
             </ul>
         </section>
         <section data-auto-animate data-timing="120">
@@ -95,27 +101,55 @@
                 <li class="fragment">Lack of commodities</li>
             </ul>
         </section>
-        <section data-auto-animate data-timing="120">
+        <section data-auto-animate data-timing="240">
             <h2>Platform Engineering</h2>
             <aside class="notes">
-                There is no single definition.
-                It commonly is used to refer to an IaaS platform, such as an integrated CI/CD/k8s platform.
-                At Grubhub, we have taken a more holistic approach (similar to Netflix)
-                We encompass language-specific tooling to improve the end-to-end developer experience,
-                while still supporting a language-agnostic infrastructure.
+                Platform engineering picks up where devops leaves off
+                it includes IaaS platform, such as an integrated CI/CD/k8s platform.
+                this is language-agnostic
+                but usually (us and netflix, etc) it is more than that as well
+                the service platform encompass language-specific tooling to improve the e2e developer experience,
                 build tooling: eg bazel, gradle plugins
                 platform services: kafka or other message buses. API gateway, discovery, cloud config server
-                Runtime libraries: Spring boot extensions
+                Runtime libraries: Spring boot extensions, libraries tp plugin into architecture (observability, platform services, etc)
             </aside>
-            <ul>
-                <li class="fragment">Ecosystem-specific build tooling (bazel, Gradle, Maven, etc)</li>
-                <li class="fragment">Platform Services (Message brokers, API gateways, config servers, discovery)</li>
-                <li class="fragment">Observability (logging, metrics, tracing)</li>
-                <li class="fragment">Service Runtime libraries (spring boot extensions)</li>
-                <li class="fragment">Frontend libraries</li>
-                <li class="fragment">Data Platform (Data lake, ML models)</li>
-                <li class="fragment">Security (DevSecOps)</li>
-            </ul>
+            <div class="grid-area">
+                <div class="fragment">
+                    <h3>Infrastructure</h3>
+                    <ul>
+                        <li class="fragment">CI tooling</li>
+                        <li class="fragment">CD tooling</li>
+                        <li class="fragment">IaaS</li>
+                        <li class="fragment">Networking</li>
+                        <li class="fragment">Service Mesh</li>
+                        <li class="fragment">Observability</li>
+                    </ul>
+                </div>
+                <div class="fragment">
+                    <h3>Service</h3>
+                    <ul>
+                        <li class="fragment">Build Tooling</li>
+                        <li class="fragment">Platform Services</li>
+                        <li class="fragment">Runtime libraries</li>
+                        <li class="fragment">DevSecOps</li>
+                    </ul>
+                </div>
+                <div class="fragment">
+                    <h3>Frontend</h3>
+                    <ul>
+                        <li>Web</li>
+                        <li>Android</li>
+                        <li>iOS</li>
+                    </ul>
+                </div>
+                <div class="fragment">
+                    <h3>Data</h3>
+                    <ul>
+                        <li>Data Lake</li>
+                        <li>Offline ML Training</li>
+                    </ul>
+                </div>
+            </div>
         </section>
         <section data-auto-animate data-timing="120">
             <h3 data-id="section">Guiding Principles</h3>
