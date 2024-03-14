@@ -106,7 +106,7 @@
             <aside class="notes">
                 Platform engineering picks up where devops leaves off
                 it includes IaaS platform, such as an integrated CI/CD/k8s platform.
-                this is language-agnostic
+                this is language-agnostic, docker is the interface
                 but usually (us and netflix, etc) it is more than that as well
                 the service platform encompass language-specific tooling to improve the e2e developer experience,
                 build tooling: eg bazel, gradle plugins
@@ -117,21 +117,21 @@
                 <div class="fragment">
                     <h3>Infrastructure</h3>
                     <ul>
-                        <li class="fragment">CI tooling</li>
-                        <li class="fragment">CD tooling</li>
-                        <li class="fragment">IaaS</li>
-                        <li class="fragment">Networking</li>
-                        <li class="fragment">Service Mesh</li>
-                        <li class="fragment">Observability</li>
+                        <li>CI tooling</li>
+                        <li>CD tooling</li>
+                        <li>IaaS</li>
+                        <li>Networking</li>
+                        <li>Service Mesh</li>
+                        <li>Observability</li>
                     </ul>
                 </div>
                 <div class="fragment">
                     <h3>Service</h3>
                     <ul>
-                        <li class="fragment">Build Tooling</li>
-                        <li class="fragment">Platform Services</li>
-                        <li class="fragment">Runtime libraries</li>
-                        <li class="fragment">DevSecOps</li>
+                        <li>Build Tooling</li>
+                        <li>Platform Services</li>
+                        <li>Runtime libraries</li>
+                        <li>DevSecOps</li>
                     </ul>
                 </div>
                 <div class="fragment">
@@ -152,12 +152,11 @@
             </div>
         </section>
         <section data-auto-animate data-timing="120">
-            <h3 data-id="section">Guiding Principles</h3>
             <h2>Developer Experience</h2>
             <aside class="notes">
-                this talk is unopinionated, but we will use examples of our implementation.
-                But we have developed some opinions that guide our overall approach.
-                The single theme they all draw back to is Developer Experience.
+                once you have all the things working, you have a platform
+                but that is just the start
+                the platform can be a way to plugin into a bigger effort: DX
                 DX's scope is bigger than Platform, but Platform provides the tech solution part of DX
                 For the non-technical aspect, refer to Cat Hicks
             </aside>
@@ -181,6 +180,11 @@
         </section>
         <section data-auto-animate data-timing="120">
             <h3 data-id="section">Guiding Principles</h3>
+            <aside class="notes">
+                this talk is unopinionated, but we will use examples of our implementation.
+                But we have developed some opinions that guide our overall approach.
+                The single theme they all draw back to is Developer Experience.
+            </aside>
             <h2>Golden path</h2>
             <ul>
                 <li class="fragment">Not "golden cage" or "walled garden"</li>
@@ -202,7 +206,6 @@
                 <li class="fragment">Force adoption only as a last resort</li>
             </ul>
         </section>
-
         <section data-auto-animate data-timing="120">
             <h3 data-id="section">Guiding Principles</h3>
             <h2>Communication / Feedback Loops</h2>
@@ -244,17 +247,6 @@
             </aside>
             <ul>
                 <li class="fragment">Keep related work together (iaas definitions, docs, etc)</li>
-            </ul>
-        </section>
-        <section data-auto-animate data-timing="120">
-            <h3 data-id="section">Technical Philosophy</h3>
-            <h2>Docker</h2>
-            <aside class="notes">
-
-            </aside>
-            <ul>
-                <li class="fragment">Docker is the standard deployable unit</li>
-                <li class="fragment">Platform Agnostic</li>
             </ul>
         </section>
         <section data-auto-animate data-timing="240">
@@ -328,7 +320,18 @@
                 <li class="fragment">Collect information for reporting back to the IDP</li>
             </ul>
         </section>
-        <section>
+        <section data-timing="30">
+            <h2>Resources</h2>
+            <aside class="notes">
+            </aside>
+            <p class="fragment">
+                <a href="https://platformengineering.org/">platformengineering.org community hub + slack</a>
+            </p>
+            <p class="fragment">
+                <a href=https://netflixtechblog.medium.com/">Netflix TechBlog</a>
+            </p>
+        </section>
+        <section data-timing="30">
             <h2>References</h2>
             <aside class="notes">
             </aside>
