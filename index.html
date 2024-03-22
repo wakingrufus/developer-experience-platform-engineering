@@ -87,7 +87,7 @@
                 <li>Practice Platform Engineering</li>
             </ul>
         </section>
-        <section data-auto-animate data-timing="120">
+        <section data-auto-animate data-timing="90">
             <h2>Problems with DevOps</h2>
             <aside class="notes">
                 DevOps solves a lot of problems, but presents some new ones
@@ -101,17 +101,31 @@
                 <li class="fragment">Lack of commodities</li>
             </ul>
         </section>
-        <section data-auto-animate data-timing="240">
+        <section data-auto-animate data-timing="60">
             <h2>Platform Engineering</h2>
             <aside class="notes">
                 Platform engineering picks up where devops leaves off
-                it includes IaaS platform, such as an integrated CI/CD/k8s platform.
+                Centralize expertise in CI/CD, and builds a self-service product around it.
+                Teams still own their CI/CD, but the heavy lifting happens under the hood of the platform tooling
+                This would be a "devops team".
+                Once we have done that, we can expand the scope beyond a "devops team"
+            </aside>
+            <ul>
+                <li class="fragment">Centralize Expertise</li>
+                <li class="fragment">Expand Scope</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="150">
+            <h2>Platform Engineering</h2>
+            <aside class="notes">
+                Infrastructure includes IaaS platform, such as CI/CD/k8s platform.
                 this is language-agnostic, docker is the interface
                 but usually (us and netflix, etc) it is more than that as well
                 the service platform encompass language-specific tooling to improve the e2e developer experience,
                 build tooling: eg bazel, gradle plugins
                 platform services: kafka or other message buses. API gateway, discovery, cloud config server
-                Runtime libraries: Spring boot extensions, libraries tp plugin into architecture (observability, platform services, etc)
+                Runtime libraries: Spring boot extensions, libraries tp plugin into architecture (observability,
+                platform services, etc)
             </aside>
             <div class="grid-area">
                 <div class="fragment">
@@ -151,7 +165,7 @@
                 </div>
             </div>
         </section>
-        <section data-auto-animate data-timing="120">
+        <section data-auto-animate data-timing="90">
             <h2>Developer Experience</h2>
             <aside class="notes">
                 once you have all the things working, you have a platform
@@ -178,27 +192,28 @@
                 </div>
             </div>
         </section>
-        <section data-auto-animate data-timing="120">
+        <section data-auto-animate data-timing="90">
             <h3 data-id="section">Guiding Principles</h3>
             <aside class="notes">
-                this talk is unopinionated, but we will use examples of our implementation.
-                But we have developed some opinions that guide our overall approach.
-                The single theme they all draw back to is Developer Experience.
+                In order to ensure that our platform design aligns to DX goals
+                we have developed some guiding principles
             </aside>
-            <h2>Golden path</h2>
+            <h2 class="fragment">Golden path</h2>
             <ul>
                 <li class="fragment">Not "golden cage" or "walled garden"</li>
+                <li class="fragment">Allows innovation</li>
+                <li class="fragment">Reduces frustration</li>
                 <li class="fragment">When should team "off-road"?</li>
                 <li class="fragment">When should path be "widened"?</li>
             </ul>
         </section>
-        <section data-auto-animate data-timing="120">
+        <section data-auto-animate data-timing="60">
             <h3 data-id="section">Guiding Principles</h3>
             <h2>Carrot vs Stick</h2>
             <aside class="notes">
                 using the stick will create a bad experience
                 creates friction and distrust between platform and delivery teams
-                will decrease moral and burnout
+                will decrease moral and cause burnout
             </aside>
             <ul>
                 <li class="fragment">Build a great product</li>
@@ -206,47 +221,77 @@
                 <li class="fragment">Force adoption only as a last resort</li>
             </ul>
         </section>
-        <section data-auto-animate data-timing="120">
+        <section data-auto-animate data-timing="45">
             <h3 data-id="section">Guiding Principles</h3>
             <h2>Communication / Feedback Loops</h2>
             <aside class="notes">
-                As we go through some of our specific impl,
-                you might notice they all are about communication
-                either from dev to platform or from platform to dev
+                The DX side of Platform engineering is all about building a
+                bidirectional communication channel between platform and product delivery
             </aside>
             <ul>
-                <li class="fragment"></li>
+                <li class="fragment">Enable informed decisions</li>
+                <li class="fragment">Enable informed planning</li>
             </ul>
         </section>
-        <section data-auto-animate data-timing="120">
+        <section data-auto-animate data-timing="15">
             <h3 data-id="section">Technical Philosophy</h3>
             <aside class="notes">
-                These are technical decisions we made based that help us stick to these principles
+                These principles led us to make a few high level tech decisions
+                that provide some context on why we have implemented platform features
+                the way we have
             </aside>
         </section>
-        <section data-auto-animate data-timing="120">
+        <section data-auto-animate data-timing="60">
             <h3 data-id="section">Technical Philosophy</h3>
             <h2>Don't break the build</h2>
             <aside class="notes">
                 don't break downstream team's builds or other processes
+                This doesn't mean we never change things
+                It means we design for these changes
+                How we do this will be covered more as we go
             </aside>
             <ul>
-                <li class="fragment">Can't stagnate</li>
+                <li class="fragment">Don't disrupt productivity</li>
                 <li class="fragment">Anticipate breaking changes</li>
                 <li class="fragment">Help teams migrate</li>
                 <li class="fragment">Track and report progress</li>
             </ul>
         </section>
+        <section data-auto-animate data-timing="15">
+            <h3 data-id="section">Technical Philosophy</h3>
+            <h2>Monorepo vs Polyrepo</h2>
+            <aside class="notes">
+                Core problem: How do we deliver shared build tooling?
+            </aside>
+        </section>
         <section data-auto-animate data-timing="120">
             <h3 data-id="section">Technical Philosophy</h3>
-            <h2>Monorepo vs polyrepo</h2>
+            <h2>Cost of Monorepo</h2>
             <aside class="notes">
-                The concept of the monorepo solves a specific problem: dealing with changes which effect multiple parts of the system. But it asks a lot of you. It often requires a whole build engineering team to maintain the highly customized build. It results in large repositories.
-                {Insert anecdote about exceeding maximum number of PR reviewers on github due to codeowners}
-                We believe that we can solve the problem of managing changes and upgrades across our software components without taking on the downsides of a monorepo. It requires a little more work, but once it is in place, it gives us the best of both worlds, without introducing tight coupling at the repo layer or sacrificing autonomy.
+                Build team: monorepo requires a highly customized or low-level build system which requires a dedicated
+                team to build and maintain
+                Scaling issues: Clone time / disk space. github codeowners
+                We believe that we can solve the problem of managing changes and upgrades across our software components
+                without taking on the downsides of a monorepo.
+                It requires a little more work, but once it is in place, it gives us the best of both worlds, without
+                introducing tight coupling at the repo layer or sacrificing autonomy.
+            </aside>
+            <ul>
+                <li class="fragment">Requires dedicated build team</li>
+                <li class="fragment">Large git repos have scaling limitations</li>
+                <li class="fragment">Large git repos have scaling limitations</li>
+                <li class="fragment">Reduces Autonomy</li>
+                <li class="fragment">Increases Coupling</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="120">
+            <h3 data-id="section">Technical Philosophy</h3>
+            <h2>Principles of Polyrepo</h2>
+            <aside class="notes">
             </aside>
             <ul>
                 <li class="fragment">Keep related work together (iaas definitions, docs, etc)</li>
+                <li class="fragment">>Deliver shared tooling by plugging into CI and build systems</li>
             </ul>
         </section>
         <section data-auto-animate data-timing="240">
@@ -345,16 +390,20 @@
             <aside class="notes">
             </aside>
             <p class="fragment">
-                <a href="https://dev.to/jreock/developer-experience-is-dead-long-live-developer-experience-1col">Developer Experience is Dead: Long Live Developer Experience!</a> - Justin Reock
+                <a href="https://dev.to/jreock/developer-experience-is-dead-long-live-developer-experience-1col">Developer
+                    Experience is Dead: Long Live Developer Experience!</a> - Justin Reock
             </p>
             <p class="fragment">
-                <a href="https://osf.io/preprints/psyarxiv/qz43x">Psychological Affordances Can Provide a Missing Explanatory Layer for Why Interventions to Improve Developer Experience Take Hold or Fail</a> - <a href="https://www.drcathicks.com/">Cat Hicks</a>
+                <a href="https://osf.io/preprints/psyarxiv/qz43x">Psychological Affordances Can Provide a Missing
+                    Explanatory Layer for Why Interventions to Improve Developer Experience Take Hold or Fail</a> - <a
+                    href="https://www.drcathicks.com/">Cat Hicks</a>
             </p>
         </section>
         <section data-timing="10">
             <div class="grid-area">
                 <div style="text-align: left">
-                    <div><a href="https://wakingrufus.github.io/developer-experience-platform-engineering/">https://wakingrufus.github.io/developer-experience-platform-engineering/</a></div>
+                    <div><a href="https://wakingrufus.github.io/developer-experience-platform-engineering/">https://wakingrufus.github.io/developer-experience-platform-engineering/</a>
+                    </div>
                     <p class="inline-image">
                         <img alt="github logo" src="github-logo.png" height="48" width="48"/>
                         <span style="padding-left: .5em">wakingrufus</span>
