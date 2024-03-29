@@ -87,6 +87,18 @@
                 <li>Practice Platform Engineering</li>
             </ul>
         </section>
+        <section data-timing="30">
+            <aside class="notes">
+            </aside>
+            <h2>Agenda</h2>
+            <ul>
+                <li class="fragment">History: DevOps -> Platform Engineering</li>
+                <li class="fragment">What is Platform Engineering?</li>
+                <li class="fragment">What makes up a platform?</li>
+                <li class="fragment">How does Platform Engineering effect Developer Experience?</li>
+                <li class="fragment">Case Study</li>
+            </ul>
+        </section>
         <section data-auto-animate data-timing="90">
             <h2>Problems with DevOps</h2>
             <aside class="notes">
@@ -166,10 +178,86 @@
             </div>
         </section>
         <section data-auto-animate data-timing="90">
+            <h3 data-id="section">Platform Elements of DX</h3>
+            <aside class="notes">
+                We focus on backend microservices platform, so we will review what elements make up this part of the platform,
+                and some specific about how we built each part.
+                then we move on to discussing bigger picture principles that apply to any of these platform types.
+                First is CI/CD, what the traditional "DevOps" team would build
+                At GH, we use Jenkins for CI, Spinnaker for pipelines, but our actual deployments are a homegrown tool called
+                Busboy. We built this in 2014, before k8s existed. Running Docker in prod was almost unheard of at the time.
+                We are moving to replace our custom stuff with k8s, but the value proposition is lower than at an org
+                building a greenfield platform.
+            </aside>
+            <h2>CI/CD</h2>
+            <ul>
+                <li class="fragment">Build / Test / Integrate Code</li>
+                <li class="fragment">View deployment state</li>
+                <li class="fragment">Trigger pipelines</li>
+                <li class="fragment">GrubHub: Jenkins + Spinnaker + Busboy</li>
+                <li class="fragment">Evolving toward k8s</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="60">
+            <h3 data-id="section">Platform Elements of DX</h3>
+            <h2>Local Development Environment</h2>
+            <ul>
+                <li class="fragment">Tilt</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="90">
+            <h3 data-id="section">Platform Elements of DX</h3>
+            <aside class="notes">
+                For our Java service platform, we use Gradle as our standard build tool
+                We have "convention" plugins that allow buildscripts to have minimal boilerplate and be declarative
+            </aside>
+            <h2>Build Tooling</h2>
+            <ul>
+                <li class="fragment">Gradle Plugins</li>
+                <li class="fragment">Generating deployable unit is table stakes</li>
+                <li class="fragment">Most direct line of communication to the developer</li>
+                <li class="fragment">Collect information for reporting back to the IDP</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="120">
+            <h3 data-id="section">Platform Elements of DX</h3>
+            <aside class="notes">
+                provides out of the box integration with eureka/discovery, service mesh
+                clients for cassandra, ES, kafka, grpc
+                leader election, supervision, circuit breakers
+                Runtime framework based on spring boot
+            </aside>
+            <h2>Runtime Libraries / Frameworks</h2>
+            <ul>
+                <li class="fragment">Out of the box platform integration</li>
+                <li class="fragment">Clients for platform services</li>
+                <li class="fragment">Reduce boilerplate</li>
+                <li class="fragment">Standardize features</li>
+                <li class="fragment">Roux</li>
+                <li class="fragment">Based on Spring Boot</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="60">
+            <h3 data-id="section">Platform Elements of DX</h3>
+            <aside class="notes">
+
+                END: There is one more important piece of the platform, but before we go there, let's take a look at the bigger picture.
+            </aside>
+            <h2>Documentation Platform</h2>
+            <ul>
+                <li class="fragment">Onboarding</li>
+                <li class="fragment">Discovery</li>
+                <li class="fragment">Reference</li>
+                <li class="fragment">Javadocs</li>
+            </ul>
+        </section>
+        <section data-auto-animate data-timing="90">
             <h2>Developer Experience</h2>
             <aside class="notes">
-                once you have all the things working, you have a platform
+                The elements we just reviewed is mostly about getting everything up and running
                 but that is just the start
+                the more you build, the more the work becomes less about making it all work, and more about
+                making it easier for product teams to use it
                 the platform can be a way to plugin into a bigger effort: DX
                 DX's scope is bigger than Platform, but Platform provides the tech solution part of DX
                 For the non-technical aspect, refer to Cat Hicks
@@ -192,7 +280,7 @@
                 </div>
             </div>
         </section>
-        <section data-auto-animate data-timing="90">
+        <section data-auto-animate data-timing="120">
             <h3 data-id="section">Guiding Principles</h3>
             <aside class="notes">
                 In order to ensure that our platform design aligns to DX goals
@@ -241,7 +329,7 @@
                 the way we have
             </aside>
         </section>
-        <section data-auto-animate data-timing="60">
+        <section data-auto-animate data-timing="90">
             <h3 data-id="section">Technical Philosophy</h3>
             <h2>Don't break the build</h2>
             <aside class="notes">
@@ -264,7 +352,7 @@
                 Core problem: How do we deliver shared build tooling?
             </aside>
         </section>
-        <section data-auto-animate data-timing="120">
+        <section data-auto-animate data-timing="150">
             <h3 data-id="section">Technical Philosophy</h3>
             <h2>Cost of Monorepo</h2>
             <aside class="notes">
@@ -279,100 +367,139 @@
             <ul>
                 <li class="fragment">Requires dedicated build team</li>
                 <li class="fragment">Large git repos have scaling limitations</li>
-                <li class="fragment">Large git repos have scaling limitations</li>
                 <li class="fragment">Reduces Autonomy</li>
                 <li class="fragment">Increases Coupling</li>
             </ul>
         </section>
-        <section data-auto-animate data-timing="120">
+        <section data-auto-animate data-timing="90">
             <h3 data-id="section">Technical Philosophy</h3>
             <h2>Principles of Polyrepo</h2>
             <aside class="notes">
             </aside>
             <ul>
                 <li class="fragment">Keep related work together (iaas definitions, docs, etc)</li>
-                <li class="fragment">>Deliver shared tooling by plugging into CI and build systems</li>
+                <li class="fragment">Deliver shared tooling by plugging into CI and build systems</li>
             </ul>
         </section>
-        <section data-auto-animate data-timing="240">
-            <h3 data-id="section">Platform Elements of DX</h3>
+        <section data-auto-animate data-timing="120">
+            <h3 data-id="section">IDP</h3>
+            <h2>Internal Developer Portal</h2>
             <aside class="notes">
-                This is the Hub of the DX and communication
-            </aside>
-        </section>
-        <section data-auto-animate data-timing="240">
-            <h3 data-id="section">Platform Elements of DX</h3>
-            <h2>IDP</h2>
-            <aside class="notes">
-                This is the Hub of the DX and communication
+                This is the Hub of the Communication between product delivery and platform.
+                it helps make sense of a complex microservices environment
+                Info is collected by Gradle plugins, instrumentation endpoints on services (implemented by Roux),
+                and other controlplanes such as eureka
             </aside>
             <ul>
                 <li class="fragment">IDP: "Platform" vs "Portal"</li>
                 <li class="fragment">Deployment state</li>
                 <li class="fragment">Adoption</li>
-                <li class="fragment">Security</li>
                 <li class="fragment">Service Scorecard</li>
             </ul>
         </section>
-        <section data-auto-animate data-timing="240">
-            <h3 data-id="section">Platform Elements of DX</h3>
+        <section data-auto-animate data-timing="120">
+            <h3 data-id="section">IDP</h3>
+            <aside class="notes">
+                Remember: we don't break the build. instead, we collect info, and at worst, display a red box
+                Never underestimate the power of a Red Box.
+            </aside>
             <h2>Service Scorecard</h2>
             <ul>
-                <li class="fragment">Adoption</li>
                 <li class="fragment">Security</li>
                 <li class="fragment">Modernization</li>
+                <li class="fragment">Cost</li>
+                <li class="fragment">Complexity</li>
             </ul>
+        </section>
+        <section data-auto-animate data-timing="15">
+            <h3 data-id="section">IDP</h3>
+            <aside class="notes">
+                Here is what ours looks like
+            </aside>
+            <h2>Service Scorecard</h2>
+            <img alt="IDP" src="idp.png" height="300" width="1900">
+        </section>
+        <section data-auto-animate data-timing="15">
+            <h3 data-id="section">IDP</h3>
+            <aside class="notes">
+                Here is what ours looks like
+            </aside>
+            <h2>Service Scorecard</h2>
+            <img alt="IDP" src="idp-detail.png" height="400" width="1912">
         </section>
         <section data-auto-animate data-timing="240">
-            <h3 data-id="section">Platform Elements of DX</h3>
-            <h2>Documentation Platform</h2>
-            <ul>
-                <li class="fragment">Onboarding</li>
-                <li class="fragment">Discovery</li>
-                <li class="fragment">Reference</li>
-                <li class="fragment">Javadocs</li>
-            </ul>
+            <h2>Case Study: Spring Boot 2.5 Upgrade</h2>
+            <aside class="notes">
+                As with every upgrade, review notes, try upgrade and see what breaks in tests
+                The trick with this upgrade was Mockito 4.x
+                We had many services that had not upgraded mockito in years.
+            </aside>
         </section>
         <section data-auto-animate data-timing="240">
-            <h3 data-id="section">Platform Elements of DX</h3>
-            <h2>New Project Wizard</h2>
-            <ul>
-                <li class="fragment">Streamline scratch-to-deploy process</li>
-            </ul>
+            <h2>Case Study: Spring Boot 2.5 Upgrade</h2>
+            <h3>Deprecated Dependency</h3>
+            <aside class="notes">
+                First, track the dependency. but this is 1 line item that could mean a 1 line gradle change or 1000's of lines of test code changes
+                also, what if the project does not declare a dependency, and only gets it transitively
+            </aside>
+            <img alt="Deprecated dependencies" src="dependency.png" height="229" width="1078">
         </section>
         <section data-auto-animate data-timing="240">
-            <h3 data-id="section">Platform Elements of DX</h3>
-            <h2>CI/CD</h2>
-            <ul>
-                <li class="fragment">View deployment state</li>
-                <li class="fragment">Trigger pipelines</li>
-            </ul>
+            <h2>Case Study: Spring Boot 2.5 Upgrade</h2>
+            <h3>Deprecated Dependency</h3>
+            <aside class="notes">
+                we have summary reports
+            </aside>
+            <img alt="Deprecated dependencies" src="dependency-report.png" height="284" width="414">
         </section>
         <section data-auto-animate data-timing="240">
-            <h3 data-id="section">Platform Elements of DX</h3>
-            <h2>Local Development Environment</h2>
-            <ul>
-                <li class="fragment">Tilt</li>
-            </ul>
+            <h2>Case Study: Spring Boot 2.5 Upgrade</h2>
+            <h3>ArchUnit</h3>
+            <aside class="notes">
+                Arch unit allows us to detect each line of code that needs to be changed.
+                We give this line-level detail to the developer right in the build output
+                but don't fail build
+                except for certain security mitigations or after we have achieved full compliance to prevent regressions
+                We collect a summary of this information for the IDP
+            </aside>
+            <img alt="ArchUnit CLI" src="arch-cli.png" height="400" width="1018">
         </section>
         <section data-auto-animate data-timing="240">
-            <h3 data-id="section">Platform Elements of DX</h3>
-            <h2>Build Tooling</h2>
-            <ul>
-                <li class="fragment">Gradle Plugins</li>
-                <li class="fragment">Generating deployable unit is table stakes</li>
-                <li class="fragment">Most direct line of communication to the developer</li>
-                <li class="fragment">Collect information for reporting back to the IDP</li>
-            </ul>
+            <h2>Case Study: Spring Boot 2.5 Upgrade</h2>
+            <h3>ArchUnit</h3>
+            <aside class="notes">
+                Also track deprecated spring api usage, etc joda time usage in configuration properties
+            </aside>
+            <img alt="ArchUnit UI" src="arch-ui.png" height="380" width="530">
         </section>
-        <section data-auto-animate data-timing="0">
-            <h2>Case Study: Spring Upgrade</h2>
-            <ul>
-                <li class="fragment">Gradle Plugins</li>
-                <li class="fragment">Generating deployable unit is table stakes</li>
-                <li class="fragment">Most direct line of communication to the developer</li>
-                <li class="fragment">Collect information for reporting back to the IDP</li>
-            </ul>
+        <section data-auto-animate data-timing="240">
+            <h2>Case Study: Spring Boot 2.5 Upgrade</h2>
+            <h3>ArchUnit</h3>
+            <aside class="notes">
+                we have summary reports.
+                now we have given as much info as we can to the devs, and can track their progress.
+                but we were under the gun for this upgrade. spring boot 2.x EOL was looming.
+                how can we speed it up?
+            </aside>
+            <img alt="ArchUnit Summary" src="arch-summary.png" height="339" width="1290">
+        </section>
+        <section data-auto-animate data-timing="240">
+            <h2>Case Study: Spring Boot 2.5 Upgrade</h2>
+            <h3>OpenRewrite</h3>
+            <aside class="notes">
+                you may have noticed "automated migration" links
+                using OpenRewrite, we were able to create a single gradle task a dev could run
+                to automatically convert all mockito <4 code to mockito 4 compliant
+                recipes are available for each spring upgrade, jdk version upgrades, and jakarta namespace migration
+                we have also written custom recipes to migrate usage of our own deprecated roux code.
+            </aside>
+        </section>
+        <section data-auto-animate data-timing="30">
+            <h2>Evolution without disruption</h2>
+            <aside class="notes">
+                using these tools, usage of @Deprecated in Roux went from 600 to 200 within about 9 months
+                we were able to remove that old code, without breaking any builds in the process.
+            </aside>
         </section>
         <section data-timing="30">
             <h2>Resources</h2>
