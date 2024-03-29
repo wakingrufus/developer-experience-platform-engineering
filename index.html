@@ -96,41 +96,50 @@
                 <li class="fragment">What is Platform Engineering?</li>
                 <li class="fragment">What makes up a platform?</li>
                 <li class="fragment">How does Platform Engineering effect Developer Experience?</li>
-                <li class="fragment">Case Study</li>
+                <li class="fragment">Case Study @ Grubhub</li>
             </ul>
         </section>
         <section data-auto-animate data-timing="90">
-            <h2>Problems with DevOps</h2>
+            <h2>Where we started: DevOps</h2>
             <aside class="notes">
                 DevOps solves a lot of problems, but presents some new ones
                 variety: 20 teams means 20 different ci pipes, cd pipes, build systems, etc
                 duplication: 1 or 2 ppl on every team solving the same problems
-                commodities: 90% of the time product delivery devs just want to write code and have it run
+                commodities: 90% of the time product-based devs just want to write code and have it run
             </aside>
+            <br />
             <ul>
-                <li class="fragment">Too much variety</li>
-                <li class="fragment">Duplication of effort</li>
-                <li class="fragment">Lack of commodities</li>
+                <li class="fragment"><b>Too much variety</b> <div class="fragment" style="display: inline;"> -> difficult to maintain</div></li>
+                <br />
+                <li class="fragment"><b>Duplicate Solutions</b> <div class="fragment" style="display: inline;"> -> wasted effort across teams</div></li>
+                <br />
+                <li class="fragment"><b>Siloed teams</b> <div class="fragment" style="display: inline;"> -> lack of commodities slows down product development</div></li>
             </ul>
         </section>
         <section data-auto-animate data-timing="60">
-            <h2>Platform Engineering</h2>
+            <h2>What about Platform Engineering?</h2>
             <aside class="notes">
                 Platform engineering picks up where devops leaves off
-                Centralize expertise in CI/CD, and builds a self-service product around it.
+                Centralize expertise in CI/CD and infrastructure management, and builds a self-service product around it.
                 Teams still own their CI/CD, but the heavy lifting happens under the hood of the platform tooling
                 This would be a "devops team".
-                Once we have done that, we can expand the scope beyond a "devops team"
+                Once we have done that, we can expand the scope beyond a "devops team", and influence every aspect of the 
+                engineering lifecycle, in a streamlined way.
             </aside>
+            <br />
             <ul>
-                <li class="fragment">Centralize Expertise</li>
-                <li class="fragment">Expand Scope</li>
+                <li class="fragment">Centralize Devops Expertise</li>
+                <li class="fragment">Expand Scope past operations into streamlined runtime solutions</li>
             </ul>
+            <br />
+            <br />
+            <p class="fragment">What does platform engineering encompass?</p>
         </section>
         <section data-auto-animate data-timing="150">
             <h2>Platform Engineering</h2>
             <aside class="notes">
-                Infrastructure includes IaaS platform, such as CI/CD/k8s platform.
+                Grubhub likes to divide it into four major groupings.
+                Infrastructure includes IaaS platform, such as CI/CD/k8s platform. Note the red is what devops usually entails at companies.
                 this is language-agnostic, docker is the interface
                 but usually (us and netflix, etc) it is more than that as well
                 the service platform encompass language-specific tooling to improve the e2e developer experience,
@@ -143,9 +152,8 @@
                 <div class="fragment">
                     <h3>Infrastructure</h3>
                     <ul>
-                        <li>CI tooling</li>
-                        <li>CD tooling</li>
-                        <li>IaaS</li>
+                        <li style="color: darkred;">CI/CD tooling</li>
+                        <li style="color: darkred;">IaaS</li>
                         <li>Networking</li>
                         <li>Service Mesh</li>
                         <li>Observability</li>
@@ -157,7 +165,7 @@
                         <li>Build Tooling</li>
                         <li>Platform Services</li>
                         <li>Runtime libraries</li>
-                        <li>DevSecOps</li>
+                        <li>"DevSecOps"</li>
                     </ul>
                 </div>
                 <div class="fragment">
@@ -171,8 +179,10 @@
                 <div class="fragment">
                     <h3>Data</h3>
                     <ul>
+                        <li>ETL</li>
                         <li>Data Lake</li>
-                        <li>Offline ML Training</li>
+                        <li>ML Model Training</li>
+                        <li>Operational Data stores</li>
                     </ul>
                 </div>
             </div>
