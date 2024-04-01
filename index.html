@@ -210,9 +210,24 @@
         </section>
         <section data-auto-animate data-timing="60">
             <h3 data-id="section">Platform Elements of DX</h3>
-            <h2>Local Development Environment</h2>
+            <aside class="notes">
+                With developer experience, it's important to also consider how we ensure engineers feel
+                appropriatelly equipped when doing their day to day work, from coding the next feature on their laptops,
+                to feeling confident in themselves in the face of an outage/sev scenario.
+                Grubhub: does this through providing a local environment that mimics production in _all_ aspects,
+                including what tooling is used to make changes to said environment when developing locally. The more you use something.
+                the less timid youll be in adversity (e.g. replaying a kafka topic to ensure data consistency becomes second nature) 
+
+                - working development environment in < 1hour. Little requirements as possible (only JDK setup @ grubhub + env vars)
+                - usage of same docker containers in prod
+                - change the local and prod with same tooling, a single parameter difference for "garcli", setting configuration etc.
+            </aside>
+            <h2>Development Environments</h2>
             <ul>
-                <li class="fragment">Tilt</li>
+                <li class="fragment">Repeatable local environments</li>
+                <li class="fragment">Use whats in production</li>
+                <li class="fragment">Practice using runtime tooling</li>
+                <li class="fragment">Grubhub: Tilt, Single CLI to interact with environments</li>
             </ul>
         </section>
         <section data-auto-animate data-timing="90">
@@ -505,40 +520,68 @@
                 we have also written custom recipes to migrate usage of our own deprecated roux code.
             </aside>
         </section>
-        <section data-auto-animate data-timing="30">
-            <h2>Evolution without disruption</h2>
+        <section data-auto-animate data-timing="15">
+            <h2>Evolving a platform with confidence</h2>
             <aside class="notes">
                 using these tools, usage of @Deprecated in Roux went from 600 to 200 within about 9 months
                 we were able to remove that old code, without breaking any builds in the process.
             </aside>
+            <h3>Upgrade platform(s) without disruption</h3>
             <ul>
-                <li class="fragment">@Deprecated in Roux: 600 -> 200</li>
-                <li class="fragment">DORA Metrics <- SAM</li>
+                <li class="fragment">@Deprecated in Roux (core java frameworks): 600 -> 200</li>
+                <li class="fragment">0 rollbacks, 0 failed upstream builds</li>
             </ul>
         </section>
-        <section data-timing="30">
+        <section data-auto-animate data-timing="30">
+            <h2>Evolving a platform with confidence</h2>
+            <aside class="notes">
+                <ul>
+                    <li>Deployment Frequency - avg. ~374 releases/month</li>
+                    <li>Time to Restore Service - P95: ~10 minutes</li>
+                    <li>Lead time for changes - P95: ~4 days for prod, P95: ~30minutes for preproduction</li>
+                    <li>Change Failure Rate - 3.3% deployment failure rate (including both failure and roll backs)</li>
+                </ul>
+            </aside>
+            <h2>Ensure efficiency in processes</h3>
+            <ul>
+                <li class="fragment">DORA Metrics @ Grubhub 2021-2024<br />
+                    <ul>
+                        <li class="fragment">Deployment Frequency - avg. ~374 releases/month</li>
+                        <li class="fragment">Time to Restore Service - P95: ~10 minutes</li>
+                        <li class="fragment">Lead time for changes - P95: ~4 days for prod, P95: ~30minutes for preproduction</li>
+                        <li class="fragment">Change Failure Rate - 3.3% deployment failure rate (including both failure and roll backs)</li>
+                        <li class="fragment">Reliability Targets met - 97.4% SLOs met in 2024</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section data-timing="15">
             <h2>Resources</h2>
             <aside class="notes">
             </aside>
-            <p class="fragment">
+            <p>
                 <a href="https://platformengineering.org/">platformengineering.org community hub + slack</a>
             </p>
-            <p class="fragment">
+            <p>
                 <a href=https://netflixtechblog.com/">Netflix TechBlog</a>
             </p>
         </section>
-        <section data-timing="30">
+        <section data-timing="15">
             <h2>References</h2>
             <aside class="notes">
             </aside>
-            <p class="fragment">
+            <p>
                 <a href="https://dev.to/jreock/developer-experience-is-dead-long-live-developer-experience-1col">Developer
                     Experience is Dead: Long Live Developer Experience!</a> - Justin Reock
             </p>
-            <p class="fragment">
+            <p>
                 <a href="https://osf.io/preprints/psyarxiv/qz43x">Psychological Affordances Can Provide a Missing
                     Explanatory Layer for Why Interventions to Improve Developer Experience Take Hold or Fail</a> - <a
                     href="https://www.drcathicks.com/">Cat Hicks</a>
+            </p>
+            <p>
+                <a href="https://cloud.google.com/blog/products/devops-sre/announcing-dora-2021-accelerate-state-of-devops-report">DORA Metrics - five key metrics that indicate the performance of a software development team</a> - <a
+                    href="https://cloud.google.com/blog/products/devops-sre/the-2019-accelerate-state-of-devops-elite-performance-productivity-and-scaling">DORA team @ Google</a>
             </p>
         </section>
         <section data-timing="10">
