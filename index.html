@@ -45,6 +45,7 @@
         <section data-timing="30">
             <h1>About Us</h1>
             <aside class="notes">
+                John
                 You can also find me on the Chicago Tech and Kotlin slacks and the CJUG discord
             </aside>
             <h3>John Burns</h3>
@@ -65,6 +66,9 @@
         </section>
         <section data-timing="30">
             <h1>About Us</h1>
+            <aside class="notes">
+                Sam
+            </aside>
             <h3>Sam Raghunath</h3>
             <div class="grid-area">
                 <div style="text-align: left">
@@ -79,6 +83,7 @@
         <section data-timing="30">
             <img alt="GrubHub logo" src="gh-logo.png" height="194" width="688">
             <aside class="notes">
+                John
             </aside>
             <ul>
                 <li>Unlimited PTO</li>
@@ -89,6 +94,7 @@
         </section>
         <section data-timing="30">
             <aside class="notes">
+                Sam
             </aside>
             <h2>Agenda</h2>
             <ul>
@@ -102,6 +108,7 @@
         <section data-auto-animate data-timing="90">
             <h2>Where we started: DevOps</h2>
             <aside class="notes">
+                John
                 DevOps solves a lot of problems, but presents some new ones
                 variety: 20 teams means 20 different ci pipes, cd pipes, build systems, etc
                 duplication: 1 or 2 ppl on every team solving the same problems
@@ -119,6 +126,7 @@
         <section data-auto-animate data-timing="60">
             <h2>What about Platform Engineering?</h2>
             <aside class="notes">
+                John
                 Platform engineering picks up where devops leaves off
                 Centralize expertise in CI/CD and infrastructure management, and builds a self-service product around it.
                 Teams still own their CI/CD, but the heavy lifting happens under the hood of the platform tooling
@@ -138,6 +146,7 @@
         <section data-auto-animate data-timing="150">
             <h2>Platform Engineering</h2>
             <aside class="notes">
+                Sam
                 Grubhub likes to divide it into four major groupings.
                 Infrastructure includes IaaS platform, such as CI/CD/k8s platform. Note the red is what devops usually entails at companies.
                 this is language-agnostic, docker is the interface
@@ -190,9 +199,10 @@
         <section data-auto-animate data-timing="90">
             <h3 data-id="section">Platform Elements of DX</h3>
             <aside class="notes">
+                Sam
                 We focus on backend microservices platform, so we will review what elements make up this part of the platform,
                 and some specific about how we built each part.
-                then we move on to discussing bigger picture principles that apply to any of these platform types.
+                then move on to discussing bigger picture principles that apply to any of these platform types.
                 First is CI/CD, what the traditional "DevOps" team would build
                 At GH, we use Jenkins for CI, Spinnaker for pipelines, but our actual deployments are a homegrown tool called
                 Busboy. We built this in 2014, before k8s existed. Running Docker in prod was almost unheard of at the time.
@@ -211,8 +221,9 @@
         <section data-auto-animate data-timing="60">
             <h3 data-id="section">Platform Elements of DX</h3>
             <aside class="notes">
+                Sam
                 With developer experience, it's important to also consider how we ensure engineers feel
-                appropriatelly equipped when doing their day to day work, from coding the next feature on their laptops,
+                appropriately equipped when doing their day to day work, from coding the next feature on their laptops,
                 to feeling confident in themselves in the face of an outage/sev scenario.
                 Grubhub: does this through providing a local environment that mimics production in _all_ aspects,
                 including what tooling is used to make changes to said environment when developing locally. The more you use something.
@@ -233,6 +244,7 @@
         <section data-auto-animate data-timing="90">
             <h3 data-id="section">Platform Elements of DX</h3>
             <aside class="notes">
+                John
                 For our Java service platform, we use Gradle as our standard build tool
                 We have "convention" plugins that allow buildscripts to have minimal boilerplate and be declarative
             </aside>
@@ -247,6 +259,7 @@
         <section data-auto-animate data-timing="120">
             <h3 data-id="section">Platform Elements of DX</h3>
             <aside class="notes">
+                John
                 provides out of the box integration with eureka/discovery, service mesh
                 clients for cassandra, ES, kafka, grpc
                 leader election, supervision, circuit breakers
@@ -265,7 +278,7 @@
         <section data-auto-animate data-timing="60">
             <h3 data-id="section">Platform Elements of DX</h3>
             <aside class="notes">
-
+                John
                 END: There is one more important piece of the platform, but before we go there, let's take a look at the bigger picture.
             </aside>
             <h2>Documentation Platform</h2>
@@ -279,6 +292,7 @@
         <section data-auto-animate data-timing="90">
             <h2>Developer Experience</h2>
             <aside class="notes">
+                John
                 The elements we just reviewed is mostly about getting everything up and running
                 but that is just the start
                 the more you build, the more the work becomes less about making it all work, and more about
@@ -308,6 +322,7 @@
         <section data-auto-animate data-timing="120">
             <h3 data-id="section">Guiding Principles</h3>
             <aside class="notes">
+                John
                 In order to ensure that our platform design aligns to DX goals
                 we have developed some guiding principles
             </aside>
@@ -324,6 +339,7 @@
             <h3 data-id="section">Guiding Principles</h3>
             <h2>Carrot vs Stick</h2>
             <aside class="notes">
+                John
                 using the stick will create a bad experience
                 creates friction and distrust between platform and delivery teams
                 will decrease moral and cause burnout
@@ -338,6 +354,7 @@
             <h3 data-id="section">Guiding Principles</h3>
             <h2>Communication / Feedback Loops</h2>
             <aside class="notes">
+                John
                 The DX side of Platform engineering is all about building a
                 bidirectional communication channel between platform and product delivery
             </aside>
@@ -349,6 +366,7 @@
         <section data-auto-animate data-timing="15">
             <h3 data-id="section">Technical Philosophy</h3>
             <aside class="notes">
+                John
                 These principles led us to make a few high level tech decisions
                 that provide some context on why we have implemented platform features
                 the way we have
@@ -358,6 +376,7 @@
             <h3 data-id="section">Technical Philosophy</h3>
             <h2>Don't break the build</h2>
             <aside class="notes">
+                John
                 don't break downstream team's builds or other processes
                 This doesn't mean we never change things
                 It means we design for these changes
@@ -374,6 +393,7 @@
             <h3 data-id="section">Technical Philosophy</h3>
             <h2>Monorepo vs Polyrepo</h2>
             <aside class="notes">
+                John
                 Core problem: How do we deliver shared build tooling?
             </aside>
         </section>
@@ -381,6 +401,7 @@
             <h3 data-id="section">Technical Philosophy</h3>
             <h2>Cost of Monorepo</h2>
             <aside class="notes">
+                John
                 Build team: monorepo requires a highly customized or low-level build system which requires a dedicated
                 team to build and maintain
                 Scaling issues: Clone time / disk space. github codeowners
@@ -400,6 +421,7 @@
             <h3 data-id="section">Technical Philosophy</h3>
             <h2>Principles of Polyrepo</h2>
             <aside class="notes">
+                John
             </aside>
             <ul>
                 <li class="fragment">Keep related work together (iaas definitions, docs, etc)</li>
@@ -410,6 +432,7 @@
             <h3 data-id="section">IDP</h3>
             <h2>Internal Developer Portal</h2>
             <aside class="notes">
+                John
                 This is the Hub of the Communication between product delivery and platform.
                 it helps make sense of a complex microservices environment
                 Backstage, Cortex
@@ -424,6 +447,7 @@
         <section data-auto-animate data-timing="120">
             <h3 data-id="section">IDP</h3>
             <aside class="notes">
+                John
                 Remember: we don't break the build. instead, we collect info, and at worst, display a red box
                 Never underestimate the power of a Red Box.
             </aside>
@@ -438,6 +462,7 @@
         <section data-auto-animate data-timing="15">
             <h3 data-id="section">IDP</h3>
             <aside class="notes">
+                John
                 Here is what ours looks like
                 Info is collected by Gradle plugins, instrumentation endpoints on services (implemented by Roux),
                 and other controlplanes such as eureka
@@ -448,6 +473,7 @@
         <section data-auto-animate data-timing="15">
             <h3 data-id="section">IDP</h3>
             <aside class="notes">
+                John
                 Here is what ours looks like
             </aside>
             <h2>Service Scorecard</h2>
@@ -456,6 +482,7 @@
         <section data-auto-animate data-timing="240">
             <h2>Case Study: Spring Boot 2.5 Upgrade</h2>
             <aside class="notes">
+                John
                 As with every upgrade, review notes, try upgrade and see what breaks in tests
                 The trick with this upgrade was Mockito 4.x
                 We had many services that had not upgraded mockito in years.
@@ -465,6 +492,7 @@
             <h2>Case Study: Spring Boot 2.5 Upgrade</h2>
             <h3>Deprecated Dependency</h3>
             <aside class="notes">
+                John
                 First, track the dependency. but this is 1 line item that could mean a 1 line gradle change or 1000's of lines of test code changes
                 also, what if the project does not declare a dependency, and only gets it transitively
             </aside>
@@ -474,6 +502,7 @@
             <h2>Case Study: Spring Boot 2.5 Upgrade</h2>
             <h3>Deprecated Dependency</h3>
             <aside class="notes">
+                John
                 we have summary reports
             </aside>
             <img alt="Deprecated dependencies" src="dependency-report.png" height="284" width="414">
@@ -482,6 +511,7 @@
             <h2>Case Study: Spring Boot 2.5 Upgrade</h2>
             <h3>ArchUnit</h3>
             <aside class="notes">
+                John
                 Arch unit allows us to detect each line of code that needs to be changed.
                 We give this line-level detail to the developer right in the build output
                 but don't fail build
@@ -494,6 +524,7 @@
             <h2>Case Study: Spring Boot 2.5 Upgrade</h2>
             <h3>ArchUnit</h3>
             <aside class="notes">
+                John
                 Also track deprecated spring api usage, etc joda time usage in configuration properties
             </aside>
             <img alt="ArchUnit UI" src="arch-ui.png" height="380" width="530">
@@ -513,6 +544,7 @@
             <h2>Case Study: Spring Boot 2.5 Upgrade</h2>
             <h3>OpenRewrite</h3>
             <aside class="notes">
+                John
                 you may have noticed "automated migration" links
                 using OpenRewrite, we were able to create a single gradle task a dev could run
                 to automatically convert all mockito <4 code to mockito 4 compliant
@@ -523,6 +555,7 @@
         <section data-auto-animate data-timing="15">
             <h2>Evolving a platform with confidence</h2>
             <aside class="notes">
+                John
                 using these tools, usage of @Deprecated in Roux went from 600 to 200 within about 9 months
                 we were able to remove that old code, without breaking any builds in the process.
             </aside>
@@ -535,6 +568,7 @@
         <section data-auto-animate data-timing="30">
             <h2>Evolving a platform with confidence</h2>
             <aside class="notes">
+                Sam
                 <ul>
                     <li>Deployment Frequency - avg. ~374 releases/month</li>
                     <li>Time to Restore Service - P95: ~10 minutes</li>
@@ -559,12 +593,9 @@
             <h2>Resources</h2>
             <aside class="notes">
             </aside>
-            <p>
-                <a href="https://platformengineering.org/">platformengineering.org community hub + slack</a>
-            </p>
-            <p>
-                <a href=https://netflixtechblog.com/">Netflix TechBlog</a>
-            </p>
+            <p><a href="https://platformengineering.org/">platformengineering.org community hub + slack</a></p>
+            <p><a href=https://netflixtechblog.com/">Netflix TechBlog</a></p>
+            <p><a href="https://www.pluralsight.com/developer-success-lab">Developer Success Lab</a></p>
         </section>
         <section data-timing="15">
             <h2>References</h2>
@@ -582,6 +613,9 @@
             <p>
                 <a href="https://cloud.google.com/blog/products/devops-sre/announcing-dora-2021-accelerate-state-of-devops-report">DORA Metrics - five key metrics that indicate the performance of a software development team</a> - <a
                     href="https://cloud.google.com/blog/products/devops-sre/the-2019-accelerate-state-of-devops-elite-performance-productivity-and-scaling">DORA team @ Google</a>
+            </p>
+            <p>
+                <a href="https://www.pluralsight.com/resource-center/guides/developer-thriving-white-paper">Developer Thriving Whitepaper</a>
             </p>
         </section>
         <section data-timing="10">
